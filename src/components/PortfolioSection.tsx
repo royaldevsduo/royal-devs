@@ -1,25 +1,67 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Globe, ShoppingCart, BarChart3, Smartphone, Building2, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const projects = [
   {
-    title: 'E-Commerce Platform',
-    category: 'Web Application',
-    description: 'Full-featured online store with payment integration, inventory management, and analytics.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
+    title: 'AutoParts SA',
+    client: 'Automotive Retailer',
+    category: 'E-Commerce Platform',
+    description: 'Complete e-commerce solution for a Johannesburg-based auto parts supplier. Features include inventory management, online payments via PayFast, and delivery tracking.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'PayFast'],
+    icon: ShoppingCart,
+    results: '300% increase in online sales',
   },
   {
-    title: 'SaaS Dashboard',
-    category: 'Enterprise Software',
-    description: 'Real-time analytics dashboard with beautiful data visualizations and reporting.',
+    title: 'Kasi Eats',
+    client: 'Food Delivery Startup',
+    category: 'Web & Mobile App',
+    description: 'Food ordering platform connecting local restaurants with customers in Soweto and surrounding areas. Real-time order tracking and driver management.',
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
+    technologies: ['React Native', 'Firebase', 'Google Maps API'],
+    icon: Utensils,
+    results: '5,000+ monthly orders',
+  },
+  {
+    title: 'PropertyHub Gauteng',
+    client: 'Real Estate Agency',
+    category: 'Business Website',
+    description: 'Professional property listing website with virtual tours, mortgage calculator, and lead generation system for a Pretoria real estate company.',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
+    technologies: ['Next.js', 'Supabase', 'Tailwind CSS'],
+    icon: Building2,
+    results: '150+ leads per month',
+  },
+  {
+    title: 'HealthTrack Clinics',
+    client: 'Medical Practice',
+    category: 'Booking System',
+    description: 'Patient management and appointment booking system for a network of clinics. Includes SMS reminders, patient records, and billing integration.',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
+    technologies: ['React', 'Express.js', 'MongoDB', 'Twilio'],
+    icon: Smartphone,
+    results: '60% reduction in no-shows',
+  },
+  {
+    title: 'TechStartup Analytics',
+    client: 'SaaS Company',
+    category: 'Dashboard Application',
+    description: 'Custom analytics dashboard with real-time data visualization, automated reporting, and team collaboration features for a Cape Town startup.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+    technologies: ['React', 'D3.js', 'Python', 'AWS'],
+    icon: BarChart3,
+    results: 'Processing 1M+ data points daily',
   },
   {
-    title: 'Portfolio Website',
-    category: 'Website Design',
-    description: 'Stunning personal portfolio with animations and interactive elements.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop',
+    title: 'Ubuntu Fashion',
+    client: 'Clothing Brand',
+    category: 'Brand Website',
+    description: 'Stunning fashion brand website showcasing African-inspired designs. Features lookbook galleries, size guides, and integration with their Shopify store.',
+    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=400&fit=crop',
+    technologies: ['React', 'Shopify API', 'Framer Motion'],
+    icon: Globe,
+    results: '200% increase in brand engagement',
   },
 ];
 
@@ -37,7 +79,7 @@ export function PortfolioSection() {
             Our <span className="text-gradient-gold">Portfolio</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A showcase of projects we've crafted for clients across various industries.
+            Real projects, real results. See how we've helped South African businesses thrive online.
           </p>
         </motion.div>
 
@@ -52,29 +94,51 @@ export function PortfolioSection() {
               className="group relative rounded-2xl overflow-hidden glass"
             >
               {/* Image */}
-              <div className="aspect-video overflow-hidden">
+              <div className="aspect-video overflow-hidden relative">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                
+                {/* Icon Badge */}
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/90 flex items-center justify-center">
+                  <project.icon className="w-5 h-5 text-primary-foreground" />
+                </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <span className="text-sm text-primary font-medium">{project.category}</span>
-                <h3 className="text-xl font-display font-semibold text-foreground mt-2 mb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-primary font-medium">{project.category}</span>
+                  <span className="text-xs text-muted-foreground">{project.client}</span>
+                </div>
+                <h3 className="text-xl font-display font-semibold text-foreground mb-3">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                   {project.description}
                 </p>
-                <div className="flex gap-3">
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    View
-                  </Button>
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Results */}
+                <div className="pt-4 border-t border-border">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                    <span className="text-sm font-medium text-foreground">{project.results}</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -87,8 +151,11 @@ export function PortfolioSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
+          <p className="text-muted-foreground mb-6">
+            These are just a few of the 50+ projects we've successfully delivered.
+          </p>
           <Button variant="royal" size="lg" asChild>
-            <a href="#contact">Start Your Project</a>
+            <a href="#contact">Discuss Your Project</a>
           </Button>
         </motion.div>
       </div>

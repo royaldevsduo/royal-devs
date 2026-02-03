@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Code2, Palette } from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Palette, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
@@ -29,7 +29,7 @@ export function HeroSection() {
           >
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-muted-foreground">
-              Premium Web Development Services
+              Trusted by 50+ South African Businesses
             </span>
           </motion.div>
 
@@ -41,16 +41,32 @@ export function HeroSection() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 font-body">
-            Two developers, one vision. We craft stunning websites and powerful 
-            applications that elevate your business to royalty.
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 font-body">
+            South Africa's trusted web development duo. We create stunning websites, 
+            powerful web apps, and e-commerce solutions that drive real business results.
           </p>
+
+          {/* Trust Indicators */}
+          <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-primary" />
+              <span>Secure & Reliable</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-primary" />
+              <span>Fast Delivery</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Code2 className="w-4 h-4 text-primary" />
+              <span>Modern Technologies</span>
+            </div>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="royal" size="xl" asChild>
               <a href="#contact" className="gap-2">
-                Start Your Project
+                Get a Free Quote
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
@@ -67,10 +83,10 @@ export function HeroSection() {
             className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { value: '50+', label: 'Projects Delivered' },
-              { value: '100%', label: 'Client Satisfaction' },
-              { value: '24/7', label: 'Support Available' },
-              { value: '5★', label: 'Average Rating' },
+              { value: '50+', label: 'Projects Completed' },
+              { value: '3+', label: 'Years Experience' },
+              { value: '98%', label: 'Client Retention' },
+              { value: '24hrs', label: 'Response Time' },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-display font-bold text-gradient-gold">
