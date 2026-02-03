@@ -6,7 +6,7 @@ const pricingPlans = [
   {
     name: 'Starter',
     icon: Sparkles,
-    price: '$500',
+    price: 'R1,500',
     description: 'Perfect for small businesses getting started online',
     features: [
       'Single page website',
@@ -21,7 +21,7 @@ const pricingPlans = [
   {
     name: 'Professional',
     icon: Crown,
-    price: '$1,500',
+    price: 'R4,500',
     description: 'Ideal for growing businesses needing more features',
     features: [
       'Up to 5 pages',
@@ -38,7 +38,7 @@ const pricingPlans = [
   {
     name: 'Enterprise',
     icon: Rocket,
-    price: '$3,500+',
+    price: 'R12,000+',
     description: 'Full-scale solutions for established businesses',
     features: [
       'Unlimited pages',
