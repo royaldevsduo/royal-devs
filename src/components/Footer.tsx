@@ -22,10 +22,25 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <a
               href="mailto:Royaldevsduo@gmail.com"
               className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="Royaldevsduo@gmail.com"
+            >
+              <Mail className="w-5 h-5 text-primary" />
+            </a>
+            <a
+              href="mailto:thabophiri505@gmail.com"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="thabophiri505@gmail.com"
+            >
+              <Mail className="w-5 h-5 text-primary" />
+            </a>
+            <a
+              href="mailto:mamphiswanarilinde@gmail.com"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="mamphiswanarilinde@gmail.com"
             >
               <Mail className="w-5 h-5 text-primary" />
             </a>
