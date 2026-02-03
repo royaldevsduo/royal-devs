@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle, Crown } from 'lucide-react';
+import { Mail, Send, CheckCircle, Crown, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,6 +8,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
+
+const whatsappNumbers = [
+  { number: '27753170200', display: '075 317 0200' },
+  { number: '27725033680', display: '072 503 3680' },
+  { number: '27682842850', display: '068 284 2850' },
+];
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100, 'Name is too long'),
@@ -133,6 +139,29 @@ export function ContactSection() {
                     >
                       mamphiswanarilinde@gmail.com
                     </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground">WhatsApp us</div>
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {whatsappNumbers.map((wa) => (
+                      <a
+                        key={wa.number}
+                        href={`https://wa.me/${wa.number}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm bg-green-600/20 text-green-500 px-3 py-1 rounded-full hover:bg-green-600/30 transition-colors"
+                      >
+                        <MessageCircle className="w-3 h-3" />
+                        {wa.display}
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
