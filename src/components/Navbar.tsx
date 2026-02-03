@@ -17,8 +17,10 @@ export function Navbar() {
 
   const navLinks = [
     { href: '#services', label: 'Services' },
+    { href: '#pricing', label: 'Pricing' },
     { href: '#about', label: 'About' },
     { href: '#portfolio', label: 'Portfolio' },
+    { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact' },
   ];
 

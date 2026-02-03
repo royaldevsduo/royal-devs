@@ -1,4 +1,10 @@
-import { Crown, Mail, Github, Twitter } from 'lucide-react';
+import { Crown, Mail, Github, Twitter, Linkedin, MessageCircle } from 'lucide-react';
+
+const whatsappNumbers = [
+  { number: '27753170200', display: '075 317 0200' },
+  { number: '27725033680', display: '072 503 3680' },
+  { number: '27682842850', display: '068 284 2850' },
+];
 
 export function Footer() {
   return (
@@ -16,13 +22,42 @@ export function Footer() {
           {/* Links */}
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#services" className="hover:text-primary transition-colors">Services</a>
+            <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#portfolio" className="hover:text-primary transition-colors">Portfolio</a>
+            <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
 
-          {/* Contact */}
+          {/* Social & Contact */}
           <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/royaldevsduo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="GitHub"
+            >
+              <Github className="w-5 h-5 text-primary" />
+            </a>
+            <a
+              href="https://linkedin.com/company/royaldevsduo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="LinkedIn"
+            >
+              <Linkedin className="w-5 h-5 text-primary" />
+            </a>
+            <a
+              href="https://twitter.com/royaldevsduo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
+              title="Twitter"
+            >
+              <Twitter className="w-5 h-5 text-primary" />
+            </a>
             <a
               href="mailto:Royaldevsduo@gmail.com"
               className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
@@ -31,18 +66,13 @@ export function Footer() {
               <Mail className="w-5 h-5 text-primary" />
             </a>
             <a
-              href="mailto:thabophiri505@gmail.com"
-              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
-              title="thabophiri505@gmail.com"
+              href={`https://wa.me/${whatsappNumbers[0].number}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-green-500/50 transition-colors"
+              title="WhatsApp"
             >
-              <Mail className="w-5 h-5 text-primary" />
-            </a>
-            <a
-              href="mailto:mamphiswanarilinde@gmail.com"
-              className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"
-              title="mamphiswanarilinde@gmail.com"
-            >
-              <Mail className="w-5 h-5 text-primary" />
+              <MessageCircle className="w-5 h-5 text-green-500" />
             </a>
           </div>
         </div>
