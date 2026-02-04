@@ -28,11 +28,11 @@ export function AboutSection() {
             </div>
             
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Meet the <span className="text-gradient-gold">Royal Duo</span>
+              Meet the <span className="text-gradient-gold">Royal Trio</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              We're <strong className="text-foreground">Thabo</strong> and <strong className="text-foreground">Mamphiswana</strong> — two 
+              We're <strong className="text-foreground">Thabo</strong>, <strong className="text-foreground">Rilinde</strong>, and <strong className="text-foreground">Mukovhe</strong> — three 
               passionate developers from South Africa who believe that every business 
               deserves a powerful online presence, regardless of size.
             </p>
@@ -92,7 +92,7 @@ export function AboutSection() {
               {/* Center content */}
               <div className="absolute inset-24 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold-lg">
                 <div className="text-center">
-                  <div className="text-5xl font-display font-bold text-primary-foreground">2</div>
+                  <div className="text-5xl font-display font-bold text-primary-foreground">3</div>
                   <div className="text-sm font-semibold text-primary-foreground/80">Developers</div>
                 </div>
               </div>

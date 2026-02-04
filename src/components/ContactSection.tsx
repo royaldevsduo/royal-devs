@@ -259,10 +259,10 @@ export function ContactSection() {
                       <SelectValue placeholder="Budget Range" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="<1k">Less than $1,000</SelectItem>
-                      <SelectItem value="1k-5k">$1,000 - $5,000</SelectItem>
-                      <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                      <SelectItem value="10k+">$10,000+</SelectItem>
+                      <SelectItem value="<500">Less than R500</SelectItem>
+                      <SelectItem value="500-1k">R500 - R1,000</SelectItem>
+                      <SelectItem value="1k-2k">R1,000 - R2,000</SelectItem>
+                      <SelectItem value="2k+">R2,000+</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
