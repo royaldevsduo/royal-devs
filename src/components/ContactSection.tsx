@@ -75,6 +75,28 @@ export function ContactSection() {
 
       if (error) throw error;
 
+       // Send email notification to the team
+       try {
+         await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-contact`, {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+             'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+           },
+           body: JSON.stringify({
+             name: formData.name.trim(),
+             email: formData.email.trim(),
+             company: formData.company.trim() || undefined,
+             projectType: formData.projectType,
+             budget: formData.budget || undefined,
+             message: formData.message.trim(),
+           }),
+         });
+       } catch (emailError) {
+         // Email notification failed but form was saved - don't block user
+         console.error('Email notification failed:', emailError);
+       }
+
       setIsSuccess(true);
       setFormData({ name: '', email: '', company: '', projectType: '', budget: '', message: '' });
       toast({
