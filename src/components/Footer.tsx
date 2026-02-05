@@ -15,7 +15,7 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <Crown className="w-6 h-6 text-primary" />
             <span className="text-lg font-display font-bold text-gradient-gold">
-              Royal Devs Duo
+              Royal Devs Trio
             </span>
           </div>
 
@@ -79,7 +79,7 @@ export function Footer() {
 
         <div className="text-center mt-8 pt-8 border-t border-border">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Royal Devs Duo. All rights reserved.
+            © {new Date().getFullYear()} Royal Devs Trio. All rights reserved.
           </p>
         </div>
       </div>
