@@ -36,7 +36,7 @@ export function Navbar() {
           <Link to="/" className="flex items-center gap-3 group">
             <Crown className="w-8 h-8 text-primary glow-gold group-hover:scale-110 transition-transform" />
             <span className="text-xl font-display font-bold text-gradient-gold">
-              Royal Devs Duo
+              Royal Devs Trio
             </span>
           </Link>
 

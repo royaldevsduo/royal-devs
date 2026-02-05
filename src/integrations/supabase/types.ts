@@ -80,6 +80,45 @@ export type Database = {
         }
         Relationships: []
       }
+      user_reviews: {
+        Row: {
+          company: string | null
+          created_at: string
+          id: string
+          is_approved: boolean
+          location: string | null
+          name: string
+          rating: number
+          text: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          location?: string | null
+          name: string
+          rating: number
+          text: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          location?: string | null
+          name?: string
+          rating?: number
+          text?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

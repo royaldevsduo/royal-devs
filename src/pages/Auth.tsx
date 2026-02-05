@@ -172,7 +172,7 @@ const Auth = () => {
             <div className="inline-flex items-center gap-2 mb-4">
               <Crown className="w-8 h-8 text-primary glow-gold" />
               <span className="text-2xl font-display font-bold text-gradient-gold">
-                Royal Devs Duo
+                Royal Devs Trio
               </span>
             </div>
             <h1 className="text-xl font-display font-semibold text-foreground">
