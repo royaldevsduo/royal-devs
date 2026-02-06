@@ -53,6 +53,39 @@ export type Database = {
         }
         Relationships: []
       }
+      page_views: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          id: string
+          page_path: string
+          referrer: string | null
+          user_agent: string | null
+          visitor_id: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          page_path: string
+          referrer?: string | null
+          user_agent?: string | null
+          visitor_id: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          page_path?: string
+          referrer?: string | null
+          user_agent?: string | null
+          visitor_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -77,6 +110,102 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          category: string
+          client: string
+          created_at: string
+          description: string
+          display_order: number
+          icon: string
+          id: string
+          image_url: string
+          is_featured: boolean
+          results: string
+          technologies: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          client: string
+          created_at?: string
+          description: string
+          display_order?: number
+          icon?: string
+          id?: string
+          image_url: string
+          is_featured?: boolean
+          results: string
+          technologies?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          client?: string
+          created_at?: string
+          description?: string
+          display_order?: number
+          icon?: string
+          id?: string
+          image_url?: string
+          is_featured?: boolean
+          results?: string
+          technologies?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          display_order: number
+          email: string | null
+          github_url: string | null
+          id: string
+          is_active: boolean
+          linkedin_url: string | null
+          name: string
+          role: string
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          github_url?: string | null
+          id?: string
+          is_active?: boolean
+          linkedin_url?: string | null
+          name: string
+          role: string
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          github_url?: string | null
+          id?: string
+          is_active?: boolean
+          linkedin_url?: string | null
+          name?: string
+          role?: string
+          updated_at?: string
+          whatsapp?: string | null
         }
         Relationships: []
       }
