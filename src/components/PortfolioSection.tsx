@@ -1,80 +1,72 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Globe, ShoppingCart, BarChart3, Smartphone, Building2, Utensils } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { Globe, ShoppingCart, BarChart3, Smartphone, Building2, Utensils, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useProjects } from '@/hooks/useProjects';
 
-const projects = [
-  {
-    title: 'AutoParts SA',
-    client: 'Automotive Retailer',
-    category: 'E-Commerce Platform',
-    description: 'Complete e-commerce solution for a Johannesburg-based auto parts supplier. Features include inventory management, online payments via PayFast, and delivery tracking.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'PayFast'],
-    icon: ShoppingCart,
-    results: '300% increase in online sales',
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Globe,
+  ShoppingCart,
+  BarChart3,
+  Smartphone,
+  Building2,
+  Utensils,
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-  {
-    title: 'Kasi Eats',
-    client: 'Food Delivery Startup',
-    category: 'Web & Mobile App',
-    description: 'Food ordering platform connecting local restaurants with customers in Soweto and surrounding areas. Real-time order tracking and driver management.',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
-    technologies: ['React Native', 'Firebase', 'Google Maps API'],
-    icon: Utensils,
-    results: '5,000+ monthly orders',
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 15,
+    },
   },
-  {
-    title: 'PropertyHub Gauteng',
-    client: 'Real Estate Agency',
-    category: 'Business Website',
-    description: 'Professional property listing website with virtual tours, mortgage calculator, and lead generation system for a Pretoria real estate company.',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
-    technologies: ['Next.js', 'Supabase', 'Tailwind CSS'],
-    icon: Building2,
-    results: '150+ leads per month',
-  },
-  {
-    title: 'HealthTrack Clinics',
-    client: 'Medical Practice',
-    category: 'Booking System',
-    description: 'Patient management and appointment booking system for a network of clinics. Includes SMS reminders, patient records, and billing integration.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
-    technologies: ['React', 'Express.js', 'MongoDB', 'Twilio'],
-    icon: Smartphone,
-    results: '60% reduction in no-shows',
-  },
-  {
-    title: 'TechStartup Analytics',
-    client: 'SaaS Company',
-    category: 'Dashboard Application',
-    description: 'Custom analytics dashboard with real-time data visualization, automated reporting, and team collaboration features for a Cape Town startup.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    technologies: ['React', 'D3.js', 'Python', 'AWS'],
-    icon: BarChart3,
-    results: 'Processing 1M+ data points daily',
-  },
-  {
-    title: 'Ubuntu Fashion',
-    client: 'Clothing Brand',
-    category: 'Brand Website',
-    description: 'Stunning fashion brand website showcasing African-inspired designs. Features lookbook galleries, size guides, and integration with their Shopify store.',
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=400&fit=crop',
-    technologies: ['React', 'Shopify API', 'Framer Motion'],
-    icon: Globe,
-    results: '200% increase in brand engagement',
-  },
-];
+};
 
 export function PortfolioSection() {
+  const { projects, isLoading, error } = useProjects();
+
   return (
-    <section id="portfolio" className="py-24 relative">
-      <div className="container mx-auto px-4">
+    <section id="portfolio" className="py-24 relative overflow-hidden">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+      <motion.div
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.05, 0.1, 0.05],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl"
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4"
+          >
+            Our Work
+          </motion.span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             Our <span className="text-gradient-gold">Portfolio</span>
           </h2>
@@ -83,67 +75,102 @@ export function PortfolioSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden glass"
-            >
-              {/* Image */}
-              <div className="aspect-video overflow-hidden relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                
-                {/* Icon Badge */}
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/90 flex items-center justify-center">
-                  <project.icon className="w-5 h-5 text-primary-foreground" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-primary font-medium">{project.category}</span>
-                  <span className="text-xs text-muted-foreground">{project.client}</span>
-                </div>
-                <h3 className="text-xl font-display font-semibold text-foreground mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground"
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-20 text-muted-foreground">
+            Unable to load projects. Please try again later.
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {projects.map((project) => {
+              const IconComponent = iconMap[project.icon] || Globe;
+              
+              return (
+                <motion.div
+                  key={project.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group relative rounded-2xl overflow-hidden glass hover:shadow-gold transition-all duration-300"
+                >
+                  {/* Image */}
+                  <div className="aspect-video overflow-hidden relative">
+                    <motion.img
+                      src={project.image_url}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                    
+                    {/* Icon Badge */}
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/90 flex items-center justify-center shadow-gold"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                      <IconComponent className="w-5 h-5 text-primary-foreground" />
+                    </motion.div>
 
-                {/* Results */}
-                <div className="pt-4 border-t border-border">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                    <span className="text-sm font-medium text-foreground">{project.results}</span>
+                    {/* Featured badge */}
+                    {project.is_featured && (
+                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
+                        Featured
+                      </div>
+                    )}
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-primary font-medium">{project.category}</span>
+                      <span className="text-xs text-muted-foreground">{project.client}</span>
+                    </div>
+                    <h3 className="text-xl font-display font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech) => (
+                        <motion.span
+                          key={tech}
+                          whileHover={{ scale: 1.05 }}
+                          className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground hover:bg-primary/20 hover:text-primary transition-colors cursor-default"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+
+                    {/* Results */}
+                    <div className="pt-4 border-t border-border">
+                      <div className="flex items-center gap-2">
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                          className="w-2 h-2 rounded-full bg-emerald-500"
+                        />
+                        <span className="text-sm font-medium text-foreground">{project.results}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -154,9 +181,11 @@ export function PortfolioSection() {
           <p className="text-muted-foreground mb-6">
             These are just a few of the 50+ projects we've successfully delivered.
           </p>
-          <Button variant="royal" size="lg" asChild>
-            <a href="#contact">Discuss Your Project</a>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+            <Button variant="royal" size="lg" asChild className="hover-spring">
+              <a href="#contact">Discuss Your Project</a>
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     </section>
