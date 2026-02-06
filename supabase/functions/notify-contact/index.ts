@@ -9,12 +9,9 @@
      "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
  };
  
- // Team email addresses to notify
- const TEAM_EMAILS = [
-   "Royaldevsduo@gmail.com",
-   "thabophiri505@gmail.com",
-   "mamphiswanarilinde@gmail.com",
- ];
+// Note: In Resend testing mode, can only send to account owner email
+// To send to all team members, verify a domain at resend.com/domains
+const TEAM_EMAILS = ["royaldevsduo@gmail.com"];
  
  interface ContactRequest {
    name: string;
