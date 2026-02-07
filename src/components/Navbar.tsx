@@ -17,11 +17,12 @@ export function Navbar() {
   };
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '#about', label: 'About' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/services', label: 'Services', isRoute: true },
+    { href: '/#pricing', label: 'Pricing', isRoute: false },
+    { href: '/#about', label: 'About', isRoute: false },
+    { href: '/#portfolio', label: 'Portfolio', isRoute: false },
+    { href: '/blog', label: 'Blog', isRoute: true },
+    { href: '/#contact', label: 'Contact', isRoute: false },
   ];
 
   return (
@@ -43,13 +44,23 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-muted-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
 
@@ -118,14 +129,25 @@ export function Navbar() {
         >
           <div className="container mx-auto px-4 py-6 space-y-4">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block text-muted-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </a>
+              )
             ))}
             <div className="pt-4 space-y-2">
               {user ? (
