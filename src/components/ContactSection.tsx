@@ -142,26 +142,12 @@ export function ContactSection() {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">Email us at</div>
-                  <div className="space-y-1">
-                    <a
-                      href="mailto:Royaldevsduo@gmail.com"
-                      className="block text-lg font-semibold text-primary hover:underline"
-                    >
-                      Royaldevsduo@gmail.com
-                    </a>
-                    <a
-                      href="mailto:thabophiri505@gmail.com"
-                      className="block text-sm text-primary/80 hover:underline"
-                    >
-                      thabophiri505@gmail.com
-                    </a>
-                    <a
-                      href="mailto:mamphiswanarilinde@gmail.com"
-                      className="block text-sm text-primary/80 hover:underline"
-                    >
-                      mamphiswanarilinde@gmail.com
-                    </a>
-                  </div>
+              <a
+                    href="mailto:Royaldevsduo@gmail.com"
+                    className="text-lg font-semibold text-primary hover:underline"
+                  >
+                    Royaldevsduo@gmail.com
+                  </a>
                 </div>
               </div>
 
