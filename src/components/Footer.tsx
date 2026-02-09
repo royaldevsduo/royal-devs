@@ -41,7 +41,7 @@ export function Footer() {
               <Github className="w-5 h-5 text-primary" />
             </a>
             <a
-              href="https://linkedin.com/company/royaldevsduo"
+              href="https://www.linkedin.com/in/royaldevsduo-1-a1a7383aa"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-primary/50 transition-colors"

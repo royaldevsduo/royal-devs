@@ -16,56 +16,7 @@ interface Review {
   text: string;
 }
 
-const defaultTestimonials = [
-  {
-    id: 'default-1',
-    name: 'Sipho Ndlovu',
-    company: 'AutoParts SA',
-    location: 'Johannesburg',
-    rating: 5,
-    text: 'Royal Devs Trio built our e-commerce platform from scratch. Since launching, our online sales have increased by 300%. Professional, reliable, and they truly understand what South African businesses need.',
-  },
-  {
-    id: 'default-2',
-    name: 'Nomsa Dlamini',
-    company: 'Kasi Eats',
-    location: 'Soweto',
-    rating: 5,
-    text: 'They delivered our food delivery app on time and within budget. The app handles thousands of orders monthly without issues. Best decision we made for our startup!',
-  },
-  {
-    id: 'default-3',
-    name: 'Pieter van der Berg',
-    company: 'PropertyHub Gauteng',
-    location: 'Pretoria',
-    rating: 5,
-    text: 'Our new website generates over 150 quality leads per month. The mortgage calculator and virtual tour features they built have been game-changers for our real estate business.',
-  },
-  {
-    id: 'default-4',
-    name: 'Dr. Lerato Molefe',
-    company: 'HealthTrack Clinics',
-    location: 'Sandton',
-    rating: 5,
-    text: 'The patient booking system they developed reduced our no-shows by 60%. The SMS reminders and easy-to-use interface have made our admin team much more efficient.',
-  },
-  {
-    id: 'default-5',
-    name: 'Andile Zulu',
-    company: 'Ubuntu Fashion',
-    location: 'Durban',
-    rating: 5,
-    text: 'Our brand website is absolutely stunning. It perfectly captures our African-inspired aesthetic. Website traffic has doubled since launch. Highly recommend!',
-  },
-  {
-    id: 'default-6',
-    name: 'Fatima Patel',
-    company: 'TechStartup Analytics',
-    location: 'Cape Town',
-    rating: 5,
-    text: 'They built us a custom analytics dashboard that processes over a million data points daily. The team was communicative throughout and delivered exactly what we needed.',
-  },
-];
+const defaultTestimonials: Review[] = [];
 
 function StarRating({ rating }: { rating: number }) {
   return (
