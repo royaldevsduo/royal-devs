@@ -111,7 +111,7 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass rounded-2xl p-6 relative"
+              className="glass glass-hover rounded-2xl p-6 relative"
             >
               <Quote className="w-8 h-8 text-primary/20 absolute top-4 right-4" />
               

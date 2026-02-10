@@ -95,11 +95,14 @@ export function PortfolioSection() {
               const IconComponent = iconMap[project.icon] || Globe;
               
               return (
-                <motion.div
+                <motion.a
                   key={project.id}
+                  href={project.url || '#contact'}
+                  target={project.url ? '_blank' : undefined}
+                  rel={project.url ? 'noopener noreferrer' : undefined}
                   variants={itemVariants}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative rounded-2xl overflow-hidden glass hover:shadow-gold transition-all duration-300"
+                  className="group relative rounded-2xl overflow-hidden glass hover:shadow-gold transition-all duration-300 cursor-pointer block"
                 >
                   {/* Image */}
                   <div className="aspect-video overflow-hidden relative">
@@ -126,6 +129,17 @@ export function PortfolioSection() {
                         Featured
                       </div>
                     )}
+
+                    {/* Visit overlay */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <span className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-gold">
+                        {project.url ? 'Visit Project →' : 'Get in Touch →'}
+                      </span>
+                    </motion.div>
                   </div>
 
                   {/* Content */}
@@ -166,7 +180,7 @@ export function PortfolioSection() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </motion.a>
               );
             })}
           </motion.div>

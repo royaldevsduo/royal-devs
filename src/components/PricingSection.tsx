@@ -6,7 +6,7 @@ const pricingPlans = [
   {
     name: 'Basic',
     icon: Sparkles,
-    price: 'R200',
+    price: 'R300',
     description: 'Perfect for personal projects and small businesses',
     features: [
       'Single page website',
@@ -21,7 +21,7 @@ const pricingPlans = [
   {
     name: 'Standard',
     icon: Crown,
-    price: 'R500',
+    price: 'R600',
     description: 'Ideal for growing businesses needing more features',
     features: [
       'Up to 3 pages',
@@ -37,7 +37,7 @@ const pricingPlans = [
   {
     name: 'Premium',
     icon: Rocket,
-    price: 'R1,500+',
+    price: 'R1K+',
     description: 'Full-scale solutions for established businesses',
     features: [
       'Up to 10 pages',
@@ -82,8 +82,8 @@ export function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`relative glass rounded-2xl p-8 ${
-                plan.popular ? 'border-2 border-primary scale-105' : ''
+              className={`relative glass glass-hover rounded-2xl p-8 ${
+                plan.popular ? 'border-2 border-primary scale-105 animate-pulse-glow' : 'animate-border-glow'
               }`}
             >
               {plan.popular && (

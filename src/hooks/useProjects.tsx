@@ -13,6 +13,7 @@ export interface Project {
   results: string;
   is_featured: boolean;
   display_order: number;
+  url: string | null;
 }
 
 export function useProjects(featuredOnly = false) {

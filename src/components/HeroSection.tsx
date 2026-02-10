@@ -60,8 +60,9 @@ export function HeroSection() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"
       />
       
-      {/* Grid Pattern */}
+      {/* Grid Pattern with shimmer */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+      <div className="absolute inset-0 animate-shimmer pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
