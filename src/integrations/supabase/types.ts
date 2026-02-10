@@ -128,6 +128,7 @@ export type Database = {
           technologies: string[]
           title: string
           updated_at: string
+          url: string | null
         }
         Insert: {
           category: string
@@ -143,6 +144,7 @@ export type Database = {
           technologies?: string[]
           title: string
           updated_at?: string
+          url?: string | null
         }
         Update: {
           category?: string
@@ -158,6 +160,7 @@ export type Database = {
           technologies?: string[]
           title?: string
           updated_at?: string
+          url?: string | null
         }
         Relationships: []
       }

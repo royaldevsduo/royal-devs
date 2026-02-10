@@ -118,7 +118,7 @@ export function ServicesSection() {
                 scale: 1.02,
                 transition: { type: 'spring', stiffness: 300 }
               }}
-              className="group p-8 glass rounded-2xl hover:border-primary/50 transition-all duration-300 relative overflow-hidden"
+              className="group p-8 glass glass-hover rounded-2xl hover:border-primary/50 transition-all duration-300 relative overflow-hidden animate-border-glow"
             >
               {/* Gradient background on hover */}
               <motion.div

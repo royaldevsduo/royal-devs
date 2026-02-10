@@ -86,8 +86,8 @@ export function AboutSection() {
             <div className="relative aspect-square max-w-md mx-auto">
               {/* Decorative rings */}
               <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse" />
-              <div className="absolute inset-8 rounded-full border border-primary/30" />
-              <div className="absolute inset-16 rounded-full border border-primary/40" />
+              <div className="absolute inset-8 rounded-full border border-primary/30 animate-spin-slow" />
+              <div className="absolute inset-16 rounded-full border border-primary/40 animate-border-glow" />
               
               {/* Center content */}
               <div className="absolute inset-24 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold-lg">
