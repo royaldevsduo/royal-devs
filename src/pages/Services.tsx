@@ -100,10 +100,10 @@ const Services = () => {
         <title>Web Development Services | Royal Devs Trio South Africa</title>
         <meta name="description" content="Professional web development services in South Africa. Website design, web applications, UI/UX design, backend systems, and more. Get a free quote today!" />
         <meta name="keywords" content="web development services South Africa, website design, web applications, UI/UX design, backend development, cloud solutions, MVP development" />
-        <link rel="canonical" href="https://royal-devs-forge.lovable.app/services" />
+        <link rel="canonical" href="https://royal-devs.lovable.app/services" />
         <meta property="og:title" content="Web Development Services | Royal Devs Trio" />
         <meta property="og:description" content="Professional web development services in South Africa. From websites to complex web applications." />
-        <meta property="og:url" content="https://royal-devs-forge.lovable.app/services" />
+        <meta property="og:url" content="https://royal-devs.lovable.app/services" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -112,7 +112,7 @@ const Services = () => {
             "provider": {
               "@type": "Organization",
               "name": "Royal Devs Trio",
-              "url": "https://royal-devs-forge.lovable.app"
+              "url": "https://royal-devs.lovable.app"
             },
             "areaServed": {
               "@type": "Country",
