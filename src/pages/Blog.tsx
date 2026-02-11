@@ -99,10 +99,10 @@ const Blog = () => {
         <title>Blog | Web Development Insights | Royal Devs Trio</title>
         <meta name="description" content="Expert insights on web development, UI/UX design, SEO, and digital business strategies for South African businesses. Stay updated with the latest trends." />
         <meta name="keywords" content="web development blog, South Africa tech blog, UI/UX design tips, SEO guides, startup advice, e-commerce trends" />
-        <link rel="canonical" href="https://royal-devs-forge.lovable.app/blog" />
+        <link rel="canonical" href="https://royal-devs.lovable.app/blog" />
         <meta property="og:title" content="Blog | Royal Devs Trio" />
         <meta property="og:description" content="Expert insights on web development, design, and digital strategies." />
-        <meta property="og:url" content="https://royal-devs-forge.lovable.app/blog" />
+        <meta property="og:url" content="https://royal-devs.lovable.app/blog" />
         <meta property="og:type" content="blog" />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -110,18 +110,18 @@ const Blog = () => {
             "@type": "Blog",
             "name": "Royal Devs Trio Blog",
             "description": "Expert insights on web development, UI/UX design, SEO, and digital business strategies",
-            "url": "https://royal-devs-forge.lovable.app/blog",
+            "url": "https://royal-devs.lovable.app/blog",
             "publisher": {
               "@type": "Organization",
               "name": "Royal Devs Trio",
-              "url": "https://royal-devs-forge.lovable.app"
+              "url": "https://royal-devs.lovable.app"
             },
             "blogPost": blogPosts.map(post => ({
               "@type": "BlogPosting",
               "headline": post.title,
               "description": post.excerpt,
               "datePublished": post.date,
-              "url": `https://royal-devs-forge.lovable.app/blog/${post.slug}`,
+              "url": `https://royal-devs.lovable.app/blog/${post.slug}`,
               "image": post.image
             }))
           })}

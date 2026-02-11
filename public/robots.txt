@@ -19,4 +19,4 @@ User-agent: *
 Allow: /
 Crawl-delay: 2
 
-Sitemap: https://royaldevs.lovable.app/sitemap.xml
+Sitemap: https://royal-devs.lovable.app/sitemap.xml

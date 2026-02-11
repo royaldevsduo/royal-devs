@@ -2,7 +2,7 @@ import { Crown, Mail, Github, Twitter, Linkedin, MessageCircle } from 'lucide-re
 
 const whatsappNumbers = [
   { number: '27753170200', display: '075 317 0200' },
-  { number: '27725033680', display: '072 503 3680' },
+  { number: '27786025428', display: '078 602 5428' },
   { number: '27682842850', display: '068 284 2850' },
 ];
 

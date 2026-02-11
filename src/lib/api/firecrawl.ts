@@ -58,7 +58,7 @@ export const firecrawlApi = {
 
   // Utility to trigger indexing of our own site
   async indexOurSite(): Promise<FirecrawlResponse> {
-    return this.crawl('https://royal-devs-forge.lovable.app', {
+    return this.crawl('https://royal-devs.lovable.app', {
       limit: 50,
       maxDepth: 3,
     });
