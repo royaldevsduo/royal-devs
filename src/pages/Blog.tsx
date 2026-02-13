@@ -186,9 +186,11 @@ const Blog = () => {
                     <div className="aspect-video overflow-hidden">
                       <img
                         src={post.image}
-                        alt={post.title}
+                        alt={`${post.title} - Royal Devs Trio blog article on ${post.category.toLowerCase()}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
+                        width={800}
+                        height={400}
                       />
                     </div>
                     <CardHeader className="pb-2">
@@ -247,12 +249,15 @@ const Blog = () => {
                 Get the latest articles, tips, and resources delivered straight to your inbox.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input
+                  id="newsletter-email"
                   type="email"
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                  aria-label="Email address for newsletter subscription"
                 />
-                <Button variant="royal">Subscribe</Button>
+                <Button variant="royal" aria-label="Subscribe to newsletter">Subscribe</Button>
               </div>
             </motion.div>
           </div>
