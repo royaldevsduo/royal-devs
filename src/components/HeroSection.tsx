@@ -28,7 +28,7 @@ const itemVariants: Variants = {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-label="Hero section - Premium web development agency in South Africa">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-royal" />
       

@@ -108,8 +108,11 @@ export function PortfolioSection() {
                   <div className="aspect-video overflow-hidden relative">
                     <motion.img
                       src={project.image_url}
-                      alt={project.title}
+                      alt={`${project.title} - ${project.category} web development project by Royal Devs Trio`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      width={800}
+                      height={450}
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.5 }}
                     />
