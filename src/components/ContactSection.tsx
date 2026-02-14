@@ -246,7 +246,7 @@ export function ContactSection() {
                         setErrors({ ...errors, projectType: '' });
                       }}
                     >
-                      <SelectTrigger className="bg-secondary border-border">
+                      <SelectTrigger className="bg-secondary border-border" aria-label="Project Type">
                         <SelectValue placeholder="Project Type *" />
                       </SelectTrigger>
                       <SelectContent>
@@ -263,7 +263,7 @@ export function ContactSection() {
                     value={formData.budget}
                     onValueChange={(value) => setFormData({ ...formData, budget: value })}
                   >
-                    <SelectTrigger className="bg-secondary border-border">
+                    <SelectTrigger className="bg-secondary border-border" aria-label="Budget Range">
                       <SelectValue placeholder="Budget Range" />
                     </SelectTrigger>
                     <SelectContent>
