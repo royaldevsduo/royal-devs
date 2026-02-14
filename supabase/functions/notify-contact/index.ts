@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { Resend } from "npm:resend@4.0.0";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
@@ -9,17 +10,23 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// In Resend testing mode, can only send to the API key owner's email.
-// To send to any email, verify a domain at resend.com/domains
 const TEAM_EMAILS = ["mamphiswanarilinde@gmail.com"];
 
-interface ContactRequest {
-  name: string;
-  email: string;
-  company?: string;
-  projectType: string;
-  budget?: string;
-  message: string;
+const ALLOWED_PROJECT_TYPES = ["website", "webapp", "ecommerce", "redesign", "other"];
+const ALLOWED_BUDGETS = ["<500", "500-1k", "1k-2k", "2k+", ""];
+
+// Simple HTML entity escaping to prevent XSS in email
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+interface NotifyRequest {
+  requestId: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -28,11 +35,58 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, company, projectType, budget, message }: ContactRequest = await req.json();
+    const { requestId }: NotifyRequest = await req.json();
 
-    if (!name || !email || !projectType || !message) {
-      throw new Error("Missing required fields");
+    if (!requestId || typeof requestId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Missing or invalid requestId" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
+
+    // Validate UUID format
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(requestId)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid requestId format" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Use service role to verify the request exists in database (proves it passed RLS insert)
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    const { data: contactRequest, error: dbError } = await supabase
+      .from("contact_requests")
+      .select("*")
+      .eq("id", requestId)
+      .single();
+
+    if (dbError || !contactRequest) {
+      console.error("Contact request not found:", requestId);
+      return new Response(
+        JSON.stringify({ error: "Contact request not found" }),
+        { status: 404, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Validate project type
+    if (!ALLOWED_PROJECT_TYPES.includes(contactRequest.project_type)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid project type" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Sanitize all values for HTML email
+    const name = escapeHtml(contactRequest.name);
+    const email = escapeHtml(contactRequest.email);
+    const company = contactRequest.company ? escapeHtml(contactRequest.company) : "";
+    const projectType = escapeHtml(contactRequest.project_type);
+    const budget = contactRequest.budget ? escapeHtml(contactRequest.budget) : "";
+    const message = escapeHtml(contactRequest.message);
 
     const { data, error: resendError } = await resend.emails.send({
       from: "Royal Devs Trio <onboarding@resend.dev>",

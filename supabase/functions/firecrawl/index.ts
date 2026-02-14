@@ -3,6 +3,31 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+function isValidUrl(urlString: string): boolean {
+  try {
+    const url = new URL(urlString);
+    if (!['http:', 'https:'].includes(url.protocol)) {
+      return false;
+    }
+    // Block internal/private IPs
+    const hostname = url.hostname;
+    if (
+      hostname === 'localhost' ||
+      hostname.startsWith('127.') ||
+      hostname.startsWith('192.168.') ||
+      hostname.startsWith('10.') ||
+      hostname.startsWith('172.16.') ||
+      hostname.startsWith('0.') ||
+      hostname === '[::1]'
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -25,6 +50,31 @@ Deno.serve(async (req) => {
       formattedUrl = `https://${formattedUrl}`;
     }
 
+    // Validate URL format and block internal networks
+    if (!formattedUrl || !isValidUrl(formattedUrl)) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid or disallowed URL' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate options parameters
+    const limit = options?.limit ? Number(options.limit) : undefined;
+    if (limit !== undefined && (isNaN(limit) || limit < 1 || limit > 5000)) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid limit value (1-5000)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const maxDepth = options?.maxDepth ? Number(options.maxDepth) : undefined;
+    if (maxDepth !== undefined && (isNaN(maxDepth) || maxDepth < 1 || maxDepth > 10)) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid maxDepth value (1-10)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     let endpoint: string;
     let body: Record<string, unknown>;
 
@@ -42,7 +92,7 @@ Deno.serve(async (req) => {
         endpoint = 'https://api.firecrawl.dev/v1/map';
         body = {
           url: formattedUrl,
-          limit: options?.limit || 5000,
+          limit: limit || 5000,
           includeSubdomains: options?.includeSubdomains ?? false,
         };
         break;
@@ -51,8 +101,8 @@ Deno.serve(async (req) => {
         endpoint = 'https://api.firecrawl.dev/v1/crawl';
         body = {
           url: formattedUrl,
-          limit: options?.limit || 100,
-          maxDepth: options?.maxDepth || 3,
+          limit: limit || 100,
+          maxDepth: maxDepth || 3,
           scrapeOptions: {
             formats: ['markdown', 'html'],
           },
