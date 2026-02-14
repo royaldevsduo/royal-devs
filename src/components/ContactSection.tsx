@@ -62,7 +62,7 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { data: insertedData, error } = await supabase
         .from('contact_requests')
         .insert({
           name: formData.name.trim(),
@@ -71,11 +71,13 @@ export function ContactSection() {
           project_type: formData.projectType,
           budget: formData.budget || null,
           message: formData.message.trim(),
-        });
+        })
+        .select('id')
+        .single();
 
       if (error) throw error;
 
-       // Send email notification to the team
+       // Send email notification with verified request ID
        try {
          await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-contact`, {
            method: 'POST',
@@ -84,12 +86,7 @@ export function ContactSection() {
              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
            },
            body: JSON.stringify({
-             name: formData.name.trim(),
-             email: formData.email.trim(),
-             company: formData.company.trim() || undefined,
-             projectType: formData.projectType,
-             budget: formData.budget || undefined,
-             message: formData.message.trim(),
+             requestId: insertedData.id,
            }),
          });
        } catch (emailError) {
