@@ -45,59 +45,43 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
-      damping: 15,
+      stiffness: 120,
+      damping: 16,
     },
   },
 };
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
+    <section id="services" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-royal opacity-50" />
       
-      {/* Animated background elements */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-        className="absolute -top-1/2 -right-1/2 w-full h-full opacity-5"
-        style={{
-          background: 'conic-gradient(from 0deg, transparent, hsl(var(--primary)), transparent)',
-        }}
-      />
-      
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center mb-12 md:mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4"
-          >
+          <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
             What We Offer
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="text-gradient-gold">Royal</span> Services
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             From concept to launch, we handle every aspect of your digital project with expertise and care.
           </p>
         </motion.div>
@@ -106,38 +90,25 @@ export function ServicesSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           {services.map((service, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ 
-                y: -8, 
-                scale: 1.02,
-                transition: { type: 'spring', stiffness: 300 }
-              }}
-              className="group p-8 glass glass-hover rounded-2xl hover:border-primary/50 transition-all duration-300 relative overflow-hidden animate-border-glow"
+              className="group p-6 md:p-8 glass rounded-2xl hover:border-primary/50 transition-all duration-300 relative overflow-hidden active:scale-[0.98]"
             >
-              {/* Gradient background on hover */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
               
               <div className="relative z-10">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors group-hover:shadow-gold"
-                >
-                  <service.icon className="w-7 h-7 text-primary" />
-                </motion.div>
-                <h3 className="text-xl font-display font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors group-hover:shadow-gold">
+                  <service.icon className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                </div>
+                <h3 className="text-lg md:text-xl font-display font-semibold mb-2 md:mb-3 text-foreground group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
               </div>

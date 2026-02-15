@@ -64,37 +64,35 @@ export function TestimonialsSection() {
     }
   };
 
-  // Combine user reviews with default testimonials, prioritizing user reviews
   const allTestimonials = [...userReviews, ...defaultTestimonials].slice(0, 6);
 
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
+    <section id="testimonials" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-card" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             Client <span className="text-gradient-gold">Success Stories</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
             Real feedback from real South African businesses we've helped grow.
           </p>
           
-          {/* Add Review Button */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2 min-h-[48px] active:scale-95 transition-transform">
                 <PenLine className="w-4 h-4" />
                 Share Your Experience
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md mx-4">
               <ReviewForm onSuccess={() => {
                 setIsDialogOpen(false);
                 fetchUserReviews();
@@ -103,31 +101,31 @@ export function TestimonialsSection() {
           </Dialog>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
           {allTestimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="glass glass-hover rounded-2xl p-6 relative"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.08 }}
+              className="glass rounded-2xl p-5 md:p-6 relative active:scale-[0.98] transition-transform"
             >
               <Quote className="w-8 h-8 text-primary/20 absolute top-4 right-4" />
               
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+              <div className="flex items-center gap-3 md:gap-4 mb-4">
+                <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                   <span className="text-sm font-bold text-primary">{getInitials(testimonial.name)}</span>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground truncate">{testimonial.name}</h4>
                   {testimonial.company && (
-                    <p className="text-sm text-muted-foreground">{testimonial.company}</p>
+                    <p className="text-sm text-muted-foreground truncate">{testimonial.company}</p>
                   )}
                   {testimonial.location && (
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
-                      <MapPin className="w-3 h-3" />
-                      {testimonial.location}
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{testimonial.location}</span>
                     </div>
                   )}
                 </div>
@@ -135,7 +133,7 @@ export function TestimonialsSection() {
 
               <StarRating rating={testimonial.rating} />
 
-              <p className="mt-4 text-muted-foreground text-sm leading-relaxed">
+              <p className="mt-3 md:mt-4 text-muted-foreground text-sm leading-relaxed">
                 "{testimonial.text}"
               </p>
             </motion.div>
@@ -147,16 +145,16 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-12 md:mt-16"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 glass rounded-full">
+          <div className="inline-flex items-center gap-3 px-5 md:px-6 py-3 glass rounded-full">
             <div className="flex -space-x-2">
               {['SN', 'ND', 'PV', 'LM'].map((initials, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center"
+                  className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center"
                 >
-                  <span className="text-xs font-bold text-primary">{initials}</span>
+                  <span className="text-[10px] md:text-xs font-bold text-primary">{initials}</span>
                 </div>
               ))}
             </div>

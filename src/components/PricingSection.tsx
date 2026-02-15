@@ -56,34 +56,34 @@ const pricingPlans = [
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <section id="pricing" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             Royal <span className="text-gradient-gold">Pricing</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Transparent pricing for every kingdom size. Choose the package that fits your needs.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {pricingPlans.map((plan, index) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1 }}
-              className={`relative glass glass-hover rounded-2xl p-8 ${
-                plan.popular ? 'border-2 border-primary scale-105 animate-pulse-glow' : 'animate-border-glow'
+              className={`relative glass rounded-2xl p-6 md:p-8 active:scale-[0.98] transition-transform ${
+                plan.popular ? 'border-2 border-primary md:scale-105' : ''
               }`}
             >
               {plan.popular && (
@@ -94,16 +94,16 @@ export function PricingSection() {
                 </div>
               )}
 
-              <div className="text-center mb-8">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <plan.icon className="w-8 h-8 text-primary" />
+              <div className="text-center mb-6 md:mb-8">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <plan.icon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-2">{plan.name}</h3>
-                <div className="text-4xl font-bold text-gradient-gold mb-2">{plan.price}</div>
+                <h3 className="text-xl md:text-2xl font-display font-bold mb-2">{plan.name}</h3>
+                <div className="text-3xl md:text-4xl font-bold text-gradient-gold mb-2">{plan.price}</div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-6 md:mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
@@ -114,7 +114,7 @@ export function PricingSection() {
 
               <Button
                 variant={plan.popular ? 'royal' : 'outline'}
-                className="w-full"
+                className="w-full min-h-[48px] active:scale-95 transition-transform"
                 onClick={() => {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -129,7 +129,7 @@ export function PricingSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-muted-foreground mt-12"
+          className="text-center text-muted-foreground mt-10 md:mt-12"
         >
           Need a custom solution? <a href="#contact" className="text-primary hover:underline">Contact us</a> for a personalized quote.
         </motion.p>

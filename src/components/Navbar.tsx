@@ -29,14 +29,15 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      transition={{ duration: 0.4 }}
       className="fixed top-0 left-0 right-0 z-50 glass"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <Crown className="w-8 h-8 text-primary glow-gold group-hover:scale-110 transition-transform" />
-            <span className="text-xl font-display font-bold text-gradient-gold">
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group">
+            <Crown className="w-7 h-7 md:w-8 md:h-8 text-primary glow-gold group-hover:scale-110 transition-transform" />
+            <span className="text-lg md:text-xl font-display font-bold text-gradient-gold">
               Royal Devs Trio
             </span>
           </Link>
@@ -110,31 +111,35 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile: Theme + Menu */}
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="text-foreground p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
           className="md:hidden glass border-t border-border"
         >
-          <div className="container mx-auto px-4 py-6 space-y-4">
+          <div className="container mx-auto px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               link.isRoute ? (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                  className="block text-muted-foreground hover:text-primary active:text-primary transition-colors py-3 px-2 rounded-lg active:bg-primary/5 min-h-[44px] flex items-center"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -143,20 +148,20 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                  className="block text-muted-foreground hover:text-primary active:text-primary transition-colors py-3 px-2 rounded-lg active:bg-primary/5 min-h-[44px] flex items-center"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </a>
               )
             ))}
-            <div className="pt-4 space-y-2">
+            <div className="pt-3 space-y-2 border-t border-border mt-2">
               {user ? (
                 <>
                   {isAdmin && (
                     <Button
                       variant="ghost"
-                      className="w-full justify-start gap-2"
+                      className="w-full justify-start gap-2 min-h-[48px]"
                       onClick={() => { navigate('/admin'); setIsOpen(false); }}
                     >
                       <LayoutDashboard className="w-4 h-4" />
@@ -165,7 +170,7 @@ export function Navbar() {
                   )}
                   <Button
                     variant="outline"
-                    className="w-full gap-2"
+                    className="w-full gap-2 min-h-[48px]"
                     onClick={() => { handleSignOut(); setIsOpen(false); }}
                   >
                     <LogOut className="w-4 h-4" />
@@ -176,14 +181,14 @@ export function Navbar() {
                 <>
                   <Button
                     variant="ghost"
-                    className="w-full"
+                    className="w-full min-h-[48px]"
                     onClick={() => { navigate('/auth'); setIsOpen(false); }}
                   >
                     Sign In
                   </Button>
                   <Button
                     variant="royal"
-                    className="w-full"
+                    className="w-full min-h-[48px]"
                     onClick={() => { navigate('/auth?mode=signup'); setIsOpen(false); }}
                   >
                     Get Started
