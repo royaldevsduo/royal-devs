@@ -77,7 +77,6 @@ export function ContactSection() {
 
       if (error) throw error;
 
-       // Send email notification with verified request ID
        try {
          await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-contact`, {
            method: 'POST',
@@ -90,7 +89,6 @@ export function ContactSection() {
            }),
          });
        } catch (emailError) {
-         // Email notification failed but form was saved - don't block user
          console.error('Email notification failed:', emailError);
        }
 
@@ -112,56 +110,56 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-card" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16">
+      <div className="container mx-auto px-5 sm:px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
           {/* Left - Info */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-5 md:mb-6">
               Let's Build Something <span className="text-gradient-gold">Amazing</span>
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8">
               Ready to elevate your digital presence? Tell us about your project and 
               we'll craft a solution fit for royalty.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-5 md:space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-primary" />
+                <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-sm text-muted-foreground">Email us at</div>
-              <a
+                  <a
                     href="mailto:Royaldevsduo@gmail.com"
-                    className="text-lg font-semibold text-primary hover:underline"
+                    className="text-base md:text-lg font-semibold text-primary hover:underline break-all"
                   >
                     Royaldevsduo@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <MessageCircle className="w-6 h-6 text-primary" />
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">WhatsApp us</div>
-                  <div className="flex flex-wrap gap-2 mt-1">
+                  <div className="flex flex-wrap gap-2 mt-1.5">
                     {whatsappNumbers.map((wa) => (
                       <a
                         key={wa.number}
                         href={`https://wa.me/${wa.number}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm bg-green-600/20 text-green-500 px-3 py-1 rounded-full hover:bg-green-600/30 transition-colors"
+                        className="inline-flex items-center gap-1 text-sm bg-green-600/20 text-green-500 px-3 py-1.5 rounded-full hover:bg-green-600/30 active:scale-95 transition-all min-h-[36px]"
                       >
                         <MessageCircle className="w-3 h-3" />
                         {wa.display}
@@ -172,12 +170,12 @@ export function ContactSection() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Crown className="w-6 h-6 text-primary" />
+                <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Crown className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">Response time</div>
-                  <div className="text-lg font-semibold text-foreground">Within 24 hours</div>
+                  <div className="text-base md:text-lg font-semibold text-foreground">Within 24 hours</div>
                 </div>
               </div>
             </div>
@@ -185,31 +183,31 @@ export function ContactSection() {
 
           {/* Right - Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             {isSuccess ? (
-              <div className="glass p-8 rounded-2xl text-center">
-                <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="text-2xl font-display font-bold mb-2">Message Sent!</h3>
+              <div className="glass p-6 md:p-8 rounded-2xl text-center">
+                <CheckCircle className="w-14 h-14 md:w-16 md:h-16 text-primary mx-auto mb-4" />
+                <h3 className="text-xl md:text-2xl font-display font-bold mb-2">Message Sent!</h3>
                 <p className="text-muted-foreground mb-6">
                   Thank you for reaching out. We'll be in touch soon.
                 </p>
-                <Button variant="outline" onClick={() => setIsSuccess(false)}>
+                <Button variant="outline" onClick={() => setIsSuccess(false)} className="min-h-[48px]">
                   Send Another Message
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="glass p-5 md:p-8 rounded-2xl space-y-4 md:space-y-6">
+                <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <Input
                       name="name"
                       placeholder="Your Name *"
                       value={formData.name}
                       onChange={handleChange}
-                      className="bg-secondary border-border"
+                      className="bg-secondary border-border min-h-[48px]"
                     />
                     {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
                   </div>
@@ -220,7 +218,7 @@ export function ContactSection() {
                       placeholder="Email Address *"
                       value={formData.email}
                       onChange={handleChange}
-                      className="bg-secondary border-border"
+                      className="bg-secondary border-border min-h-[48px]"
                     />
                     {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
                   </div>
@@ -231,10 +229,10 @@ export function ContactSection() {
                   placeholder="Company Name (Optional)"
                   value={formData.company}
                   onChange={handleChange}
-                  className="bg-secondary border-border"
+                  className="bg-secondary border-border min-h-[48px]"
                 />
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <Select
                       value={formData.projectType}
@@ -243,7 +241,7 @@ export function ContactSection() {
                         setErrors({ ...errors, projectType: '' });
                       }}
                     >
-                      <SelectTrigger className="bg-secondary border-border" aria-label="Project Type">
+                      <SelectTrigger className="bg-secondary border-border min-h-[48px]" aria-label="Project Type">
                         <SelectValue placeholder="Project Type *" />
                       </SelectTrigger>
                       <SelectContent>
@@ -260,7 +258,7 @@ export function ContactSection() {
                     value={formData.budget}
                     onValueChange={(value) => setFormData({ ...formData, budget: value })}
                   >
-                    <SelectTrigger className="bg-secondary border-border" aria-label="Budget Range">
+                    <SelectTrigger className="bg-secondary border-border min-h-[48px]" aria-label="Budget Range">
                       <SelectValue placeholder="Budget Range" />
                     </SelectTrigger>
                     <SelectContent>
@@ -276,10 +274,10 @@ export function ContactSection() {
                   <Textarea
                     name="message"
                     placeholder="Tell us about your project... *"
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="bg-secondary border-border resize-none"
+                    className="bg-secondary border-border resize-none min-h-[120px]"
                   />
                   {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
                 </div>
@@ -288,7 +286,7 @@ export function ContactSection() {
                   type="submit"
                   variant="royal"
                   size="lg"
-                  className="w-full gap-2"
+                  className="w-full gap-2 min-h-[52px] active:scale-95 transition-transform"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

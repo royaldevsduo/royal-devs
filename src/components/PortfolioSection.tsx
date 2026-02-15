@@ -17,21 +17,20 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
-      damping: 15,
+      stiffness: 120,
+      damping: 16,
     },
   },
 };
@@ -40,37 +39,23 @@ export function PortfolioSection() {
   const { projects, isLoading, error } = useProjects();
 
   return (
-    <section id="portfolio" className="py-24 relative overflow-hidden">
-      {/* Animated background gradient */}
+    <section id="portfolio" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
-      <motion.div
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.05, 0.1, 0.05],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl"
-      />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center mb-12 md:mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4"
-          >
+          <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
             Our Work
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             Our <span className="text-gradient-gold">Portfolio</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Real projects, real results. See how we've helped South African businesses thrive online.
           </p>
         </motion.div>
@@ -88,8 +73,8 @@ export function PortfolioSection() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8"
           >
             {projects.map((project) => {
               const IconComponent = iconMap[project.icon] || Globe;
@@ -101,84 +86,67 @@ export function PortfolioSection() {
                   target={project.url ? '_blank' : undefined}
                   rel={project.url ? 'noopener noreferrer' : undefined}
                   variants={itemVariants}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative rounded-2xl overflow-hidden glass hover:shadow-gold transition-all duration-300 cursor-pointer block"
+                  className="group relative rounded-2xl overflow-hidden glass hover:shadow-gold transition-all duration-300 cursor-pointer block active:scale-[0.98]"
                 >
                   {/* Image */}
                   <div className="aspect-video overflow-hidden relative">
-                    <motion.img
+                    <img
                       src={project.image_url}
                       alt={`${project.title} - ${project.category} web development project by Royal Devs Trio`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       width={800}
                       height={450}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                     
                     {/* Icon Badge */}
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/90 flex items-center justify-center shadow-gold"
-                    >
-                      <IconComponent className="w-5 h-5 text-primary-foreground" />
-                    </motion.div>
+                    <div className="absolute top-3 right-3 md:top-4 md:right-4 w-9 h-9 md:w-10 md:h-10 rounded-xl bg-primary/90 flex items-center justify-center shadow-gold">
+                      <IconComponent className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
 
                     {/* Featured badge */}
                     {project.is_featured && (
-                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
+                      <div className="absolute top-3 left-3 md:top-4 md:left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
                         Featured
                       </div>
                     )}
-
-                    {/* Visit overlay */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <span className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-gold">
-                        {project.url ? 'Visit Project →' : 'Get in Touch →'}
-                      </span>
-                    </motion.div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-4 md:p-6">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-primary font-medium">{project.category}</span>
                       <span className="text-xs text-muted-foreground">{project.client}</span>
                     </div>
-                    <h3 className="text-xl font-display font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg md:text-xl font-display font-semibold text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                    <p className="text-muted-foreground text-sm mb-3 md:mb-4 line-clamp-2 md:line-clamp-3">
                       {project.description}
                     </p>
 
                     {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <motion.span
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span
                           key={tech}
-                          whileHover={{ scale: 1.05 }}
-                          className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground hover:bg-primary/20 hover:text-primary transition-colors cursor-default"
+                          className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground"
                         >
                           {tech}
-                        </motion.span>
+                        </span>
                       ))}
+                      {project.technologies.length > 4 && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
                     </div>
 
                     {/* Results */}
-                    <div className="pt-4 border-t border-border">
+                    <div className="pt-3 md:pt-4 border-t border-border">
                       <div className="flex items-center gap-2">
-                        <motion.div
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="w-2 h-2 rounded-full bg-emerald-500"
-                        />
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
                         <span className="text-sm font-medium text-foreground">{project.results}</span>
                       </div>
                     </div>
@@ -193,16 +161,14 @@ export function PortfolioSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-10 md:mt-12"
         >
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground mb-5 md:mb-6">
             These are just a few of the 50+ projects we've successfully delivered.
           </p>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-            <Button variant="royal" size="lg" asChild className="hover-spring">
-              <a href="#contact">Discuss Your Project</a>
-            </Button>
-          </motion.div>
+          <Button variant="royal" size="lg" asChild className="active:scale-95 transition-transform min-h-[48px]">
+            <a href="#contact">Discuss Your Project</a>
+          </Button>
         </motion.div>
       </div>
     </section>
