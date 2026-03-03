@@ -2,7 +2,7 @@
  * Royal Devs Theme – Front-end Scripts
  *
  * @package RoyalDevs
- * @since 1.0.0
+ * @since 1.1.0
  */
 
 (function () {
@@ -51,12 +51,35 @@
                     }
                 });
             },
-            { threshold: 0.15 }
+            { threshold: 0.1 }
         );
 
         sections.forEach(function (section) {
             section.classList.add('fade-in');
             observer.observe(section);
         });
+    }
+
+    /* --- Card hover tap feedback for mobile --- */
+    var cards = document.querySelectorAll('.card, .btn');
+    cards.forEach(function (card) {
+        card.addEventListener('touchstart', function () {
+            this.style.transform = 'scale(0.97)';
+        }, { passive: true });
+        card.addEventListener('touchend', function () {
+            this.style.transform = '';
+        }, { passive: true });
+    });
+
+    /* --- Sticky header shadow on scroll --- */
+    var header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 4px 30px -4px hsl(45 93% 58% / 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        }, { passive: true });
     }
 })();

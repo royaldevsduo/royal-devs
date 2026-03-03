@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file — Blog listing.
+ * Search results template.
  *
  * @package RoyalDevs
  * @since 1.1.0
@@ -11,15 +11,16 @@ get_header(); ?>
 <section class="section">
     <div class="container">
         <div class="archive__header">
-            <h1 class="archive__title text-gradient-gold"><?php esc_html_e( 'Blog', 'royal-devs' ); ?></h1>
-            <p class="archive__description"><?php esc_html_e( 'Insights, tutorials, and updates from the Royal Devs team.', 'royal-devs' ); ?></p>
+            <h1 class="archive__title text-gradient-gold">
+                <?php printf( esc_html__( 'Search Results for: %s', 'royal-devs' ), get_search_query() ); ?>
+            </h1>
         </div>
 
         <div class="site-layout--with-sidebar">
             <div class="posts-list">
                 <?php if ( have_posts() ) : ?>
                     <?php while ( have_posts() ) : the_post(); ?>
-                        <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-card' ); ?>>
+                        <article <?php post_class( 'post-card' ); ?>>
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="post-card__image">
                                     <a href="<?php the_permalink(); ?>">
@@ -29,30 +30,21 @@ get_header(); ?>
                             <?php endif; ?>
 
                             <div class="post-card__content">
-                                <div class="post-card__meta">
-                                    <span><?php echo get_the_date(); ?></span>
-                                    <span><?php the_category( ', ' ); ?></span>
-                                </div>
                                 <h2 class="post-card__title">
                                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                 </h2>
                                 <div class="post-card__excerpt">
                                     <?php echo wp_trim_words( get_the_excerpt(), 25 ); ?>
                                 </div>
-                                <a href="<?php the_permalink(); ?>" class="post-card__read-more"><?php esc_html_e( 'Read More →', 'royal-devs' ); ?></a>
                             </div>
                         </article>
                     <?php endwhile; ?>
 
                     <div class="pagination">
-                        <?php the_posts_pagination( array(
-                            'mid_size'  => 2,
-                            'prev_text' => '&larr;',
-                            'next_text' => '&rarr;',
-                        ) ); ?>
+                        <?php the_posts_pagination(); ?>
                     </div>
                 <?php else : ?>
-                    <p style="color:var(--color-muted-fg);"><?php esc_html_e( 'No posts found.', 'royal-devs' ); ?></p>
+                    <p style="color:var(--color-muted-fg);"><?php esc_html_e( 'No results found. Try a different search.', 'royal-devs' ); ?></p>
                 <?php endif; ?>
             </div>
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file — Blog listing.
+ * Archive template — categories, tags, dates.
  *
  * @package RoyalDevs
  * @since 1.1.0
@@ -11,8 +11,8 @@ get_header(); ?>
 <section class="section">
     <div class="container">
         <div class="archive__header">
-            <h1 class="archive__title text-gradient-gold"><?php esc_html_e( 'Blog', 'royal-devs' ); ?></h1>
-            <p class="archive__description"><?php esc_html_e( 'Insights, tutorials, and updates from the Royal Devs team.', 'royal-devs' ); ?></p>
+            <?php the_archive_title( '<h1 class="archive__title text-gradient-gold">', '</h1>' ); ?>
+            <?php the_archive_description( '<p class="archive__description">', '</p>' ); ?>
         </div>
 
         <div class="site-layout--with-sidebar">
@@ -31,7 +31,6 @@ get_header(); ?>
                             <div class="post-card__content">
                                 <div class="post-card__meta">
                                     <span><?php echo get_the_date(); ?></span>
-                                    <span><?php the_category( ', ' ); ?></span>
                                 </div>
                                 <h2 class="post-card__title">
                                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
