@@ -16,7 +16,7 @@
                 <?php if ( has_custom_logo() ) : ?>
                     <?php the_custom_logo(); ?>
                 <?php else : ?>
-                    <span class="site-title"><?php bloginfo( 'name' ); ?></span>
+                    <span class="text-gradient-gold"><?php bloginfo( 'name' ); ?></span>
                 <?php endif; ?>
             </a>
 
